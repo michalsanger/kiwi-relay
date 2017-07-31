@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7985a729dd7e43815324a5b9055c160d
+ * @relayHash 63ed505a9a735600e1862cb0d126a7ae
  */
 
 /* eslint-disable */
@@ -35,6 +35,14 @@ query AppQuery {
 fragment Location on Location {
   locationId
   name
+  city {
+    ...City
+  }
+}
+
+fragment City on LocationArea {
+  name
+  slug
 }
 */
 
@@ -161,6 +169,31 @@ const batch /*: ConcreteBatch*/ = {
                     "args": null,
                     "name": "name",
                     "storageKey": null
+                  },
+                  {
+                    "kind": "LinkedField",
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "LocationArea",
+                    "name": "city",
+                    "plural": false,
+                    "selections": [
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "name",
+                        "storageKey": null
+                      },
+                      {
+                        "kind": "ScalarField",
+                        "alias": null,
+                        "args": null,
+                        "name": "slug",
+                        "storageKey": null
+                      }
+                    ],
+                    "storageKey": null
                   }
                 ],
                 "storageKey": null
@@ -173,7 +206,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query AppQuery {\n  allLocations(search: \"San\") {\n    edges {\n      cursor\n      node {\n        ...Location\n      }\n    }\n  }\n}\n\nfragment Location on Location {\n  locationId\n  name\n}\n"
+  "text": "query AppQuery {\n  allLocations(search: \"San\") {\n    edges {\n      cursor\n      node {\n        ...Location\n      }\n    }\n  }\n}\n\nfragment Location on Location {\n  locationId\n  name\n  city {\n    ...City\n  }\n}\n\nfragment City on LocationArea {\n  name\n  slug\n}\n"
 };
 
 module.exports = batch;

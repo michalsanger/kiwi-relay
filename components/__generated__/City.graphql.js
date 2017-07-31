@@ -8,10 +8,9 @@
 
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
-export type Location = {|
-  +locationId: ?string;
+export type City = {|
   +name: ?string;
-  +city: ?{| |};
+  +slug: ?string;
 |};
 */
 
@@ -20,15 +19,8 @@ const fragment /*: ConcreteFragment*/ = {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
-  "name": "Location",
+  "name": "City",
   "selections": [
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "args": null,
-      "name": "locationId",
-      "storageKey": null
-    },
     {
       "kind": "ScalarField",
       "alias": null,
@@ -37,23 +29,14 @@ const fragment /*: ConcreteFragment*/ = {
       "storageKey": null
     },
     {
-      "kind": "LinkedField",
+      "kind": "ScalarField",
       "alias": null,
       "args": null,
-      "concreteType": "LocationArea",
-      "name": "city",
-      "plural": false,
-      "selections": [
-        {
-          "kind": "FragmentSpread",
-          "name": "City",
-          "args": null
-        }
-      ],
+      "name": "slug",
       "storageKey": null
     }
   ],
-  "type": "Location"
+  "type": "LocationArea"
 };
 
 module.exports = fragment;
