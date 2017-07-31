@@ -1,4 +1,4 @@
-import { createFragmentContainer, graphql } from 'react-relay';
+import { createFragmentContainer, queryRenderer, graphql } from 'react-relay';
 import Location from './Location';
 
 const LocationsList = ({ data }) => {
@@ -7,7 +7,7 @@ const LocationsList = ({ data }) => {
       Loaded: {data.allLocations.edges.length}
       <ol>
         {data.allLocations.edges.map(({ node, cursor }) =>
-          <Location data={node} key={cursor} />,
+          <Location data={node} key={cursor} />
         )}
       </ol>
     </div>
@@ -27,5 +27,5 @@ export default createFragmentContainer(
         }
       }
     }
-  `,
+  `
 );

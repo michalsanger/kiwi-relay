@@ -20,5 +20,5 @@ export default createFragmentContainer(
         ...City
       }
     }
-  `,
+  `
 );

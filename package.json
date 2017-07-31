@@ -13,6 +13,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "relay": "relay-compiler --src ./components --schema ./schema.json"
+    "relay": "relay-compiler --src ./components --schema ./schema.json",
+    "relay:watch": "relay-compiler --src ./components --schema ./schema.json --watch"
   }
 }
