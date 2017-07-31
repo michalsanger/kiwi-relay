@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 63ed505a9a735600e1862cb0d126a7ae
+ * @relayHash a1b2fcc2bb50dec0e69385e36b0fe81a
  */
 
 /* eslint-disable */
@@ -9,19 +9,16 @@
 
 /*::
 import type {ConcreteBatch} from 'relay-runtime';
-export type AppQueryResponse = {|
-  +allLocations: ?{|
-    +edges: ?$ReadOnlyArray<?{|
-      +cursor: string;
-      +node: ?{| |};
-    |}>;
-  |};
-|};
+export type AppQueryResponse = {| |};
 */
 
 
 /*
 query AppQuery {
+  ...LocationsList
+}
+
+fragment LocationsList on RootQuery {
   allLocations(search: "San") {
     edges {
       cursor
@@ -54,56 +51,9 @@ const batch /*: ConcreteBatch*/ = {
     "name": "AppQuery",
     "selections": [
       {
-        "kind": "LinkedField",
-        "alias": null,
-        "args": [
-          {
-            "kind": "Literal",
-            "name": "search",
-            "value": "San",
-            "type": "String"
-          }
-        ],
-        "concreteType": "LocationConnection",
-        "name": "allLocations",
-        "plural": false,
-        "selections": [
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "args": null,
-            "concreteType": "LocationEdge",
-            "name": "edges",
-            "plural": true,
-            "selections": [
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "args": null,
-                "name": "cursor",
-                "storageKey": null
-              },
-              {
-                "kind": "LinkedField",
-                "alias": null,
-                "args": null,
-                "concreteType": "Location",
-                "name": "node",
-                "plural": false,
-                "selections": [
-                  {
-                    "kind": "FragmentSpread",
-                    "name": "Location",
-                    "args": null
-                  }
-                ],
-                "storageKey": null
-              }
-            ],
-            "storageKey": null
-          }
-        ],
-        "storageKey": "allLocations{\"search\":\"San\"}"
+        "kind": "FragmentSpread",
+        "name": "LocationsList",
+        "args": null
       }
     ],
     "type": "RootQuery"
@@ -206,7 +156,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query AppQuery {\n  allLocations(search: \"San\") {\n    edges {\n      cursor\n      node {\n        ...Location\n      }\n    }\n  }\n}\n\nfragment Location on Location {\n  locationId\n  name\n  city {\n    ...City\n  }\n}\n\nfragment City on LocationArea {\n  name\n  slug\n}\n"
+  "text": "query AppQuery {\n  ...LocationsList\n}\n\nfragment LocationsList on RootQuery {\n  allLocations(search: \"San\") {\n    edges {\n      cursor\n      node {\n        ...Location\n      }\n    }\n  }\n}\n\nfragment Location on Location {\n  locationId\n  name\n  city {\n    ...City\n  }\n}\n\nfragment City on LocationArea {\n  name\n  slug\n}\n"
 };
 
 module.exports = batch;

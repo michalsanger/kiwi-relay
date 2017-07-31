@@ -6,7 +6,7 @@ import {
   Store,
   RecordSourceInspector,
 } from 'relay-runtime';
-import Location from './Location';
+import LocationsList from './LocationsList';
 
 async function fetchQuery(operation, variables) {
   const response = await fetch(
@@ -38,28 +38,15 @@ export default () =>
     environment={modernEnvironment}
     query={graphql`
       query AppQuery {
-        allLocations(search: "San") {
-          edges {
-            cursor
-            node {
-              ...Location
-            }
-          }
-        }
+        ...LocationsList
       }
     `}
     variables={{}}
     render={({ error, props }) => {
       if (props) {
-        const locations = props.allLocations.edges;
         return (
           <div>
-            Loaded: {locations.length}
-            <ol>
-              {locations.map(({ node, cursor }) =>
-                <Location data={node} key={cursor} />,
-              )}
-            </ol>
+            <LocationsList data={props} />
           </div>
         );
       } else {
