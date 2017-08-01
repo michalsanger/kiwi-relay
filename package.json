@@ -1,8 +1,11 @@
 {
   "dependencies": {
+    "material-ui": "next",
+    "material-ui-icons": "^1.0.0-alpha.19",
     "next": "beta",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-jss": "^7.0.2",
     "react-relay": "^1.1.0"
   },
   "devDependencies": {

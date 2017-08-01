@@ -1,3 +1,6 @@
 import App from '../components/App';
+import withRoot from '../components/withRoot';
 
-export default () => <App />;
+const Index = () => <App />;
+
+export default withRoot(Index);
