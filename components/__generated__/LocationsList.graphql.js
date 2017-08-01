@@ -9,7 +9,7 @@
 /*::
 import type {ConcreteFragment} from 'relay-runtime';
 export type LocationsList = {|
-  +LocationsList: ?{|
+  +allLocations: ?{|
     +edges: ?$ReadOnlyArray<?{|
       +cursor: string;
       +node: ?{| |};
@@ -27,7 +27,7 @@ const fragment /*: ConcreteFragment*/ = {
   "selections": [
     {
       "kind": "LinkedField",
-      "alias": "LocationsList",
+      "alias": null,
       "args": [
         {
           "kind": "Literal",
