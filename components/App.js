@@ -10,6 +10,9 @@ export default () =>
       query={graphql`
         query AppQuery {
           ...LocationsList
+          currentUser {
+            ...UserInfo_user
+          }
         }
       `}
       variables={{}}
@@ -18,6 +21,7 @@ export default () =>
           return (
             <div>
               <LocationsList data={props} />
+              <Login currentUser={props.currentUser} />
             </div>
           );
         } else {
@@ -25,5 +29,4 @@ export default () =>
         }
       }}
     />
-    <Login />
   </div>;

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash a1b2fcc2bb50dec0e69385e36b0fe81a
+ * @relayHash 2843b40eb84d718d048c8a280c5fd219
  */
 
 /* eslint-disable */
@@ -9,13 +9,19 @@
 
 /*::
 import type {ConcreteBatch} from 'relay-runtime';
-export type AppQueryResponse = {| |};
+export type AppQueryResponse = {|
+  +currentUser: ?{| |};
+|};
 */
 
 
 /*
 query AppQuery {
   ...LocationsList
+  currentUser {
+    ...UserInfo_user
+    id
+  }
 }
 
 fragment LocationsList on RootQuery {
@@ -27,6 +33,12 @@ fragment LocationsList on RootQuery {
       }
     }
   }
+}
+
+fragment UserInfo_user on Identity {
+  id
+  email
+  lastName
 }
 
 fragment Location on Location {
@@ -54,6 +66,22 @@ const batch /*: ConcreteBatch*/ = {
         "kind": "FragmentSpread",
         "name": "LocationsList",
         "args": null
+      },
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "args": null,
+        "concreteType": "Identity",
+        "name": "currentUser",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "FragmentSpread",
+            "name": "UserInfo_user",
+            "args": null
+          }
+        ],
+        "storageKey": null
       }
     ],
     "type": "RootQuery"
@@ -153,10 +181,42 @@ const batch /*: ConcreteBatch*/ = {
           }
         ],
         "storageKey": "allLocations{\"search\":\"San\"}"
+      },
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "args": null,
+        "concreteType": "Identity",
+        "name": "currentUser",
+        "plural": false,
+        "selections": [
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "args": null,
+            "name": "id",
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "args": null,
+            "name": "email",
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "args": null,
+            "name": "lastName",
+            "storageKey": null
+          }
+        ],
+        "storageKey": null
       }
     ]
   },
-  "text": "query AppQuery {\n  ...LocationsList\n}\n\nfragment LocationsList on RootQuery {\n  allLocations(search: \"San\") {\n    edges {\n      cursor\n      node {\n        ...Location\n      }\n    }\n  }\n}\n\nfragment Location on Location {\n  locationId\n  name\n  city {\n    ...City\n  }\n}\n\nfragment City on LocationArea {\n  name\n  slug\n}\n"
+  "text": "query AppQuery {\n  ...LocationsList\n  currentUser {\n    ...UserInfo_user\n    id\n  }\n}\n\nfragment LocationsList on RootQuery {\n  allLocations(search: \"San\") {\n    edges {\n      cursor\n      node {\n        ...Location\n      }\n    }\n  }\n}\n\nfragment UserInfo_user on Identity {\n  id\n  email\n  lastName\n}\n\nfragment Location on Location {\n  locationId\n  name\n  city {\n    ...City\n  }\n}\n\nfragment City on LocationArea {\n  name\n  slug\n}\n"
 };
 
 module.exports = batch;

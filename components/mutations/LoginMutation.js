@@ -16,7 +16,7 @@ const mutation = graphql`
 function commit(environment, email, password) {
   const variables = {
     email,
-    password
+    password,
   };
 
   commitMutation(environment, {
@@ -27,12 +27,14 @@ function commit(environment, email, password) {
       if (localStorage) {
         localStorage.setItem('token', response.login.token);
       }
-      if (window) {
-        window.location.reload();
-      }
       return response;
     },
-    onError: err => console.error(err)
+    updater: proxyStore => {
+      const login = proxyStore.getRootField('login');
+      const identity = login.getLinkedRecord('identity');
+      proxyStore.get('client:root').setLinkedRecord(identity, 'currentUser');
+    },
+    onError: err => console.error(err),
   });
 }
 
