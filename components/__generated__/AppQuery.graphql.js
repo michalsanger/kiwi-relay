@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash a1b2fcc2bb50dec0e69385e36b0fe81a
+ * @relayHash e2c423673eda5fd4058dcc684a2e1d9b
  */
 
 /* eslint-disable */
@@ -23,23 +23,15 @@ fragment LocationsList on RootQuery {
     edges {
       cursor
       node {
-        ...Location
+        locationId
+        name
+        city {
+          slug
+          name
+        }
       }
     }
   }
-}
-
-fragment Location on Location {
-  locationId
-  name
-  city {
-    ...City
-  }
-}
-
-fragment City on LocationArea {
-  name
-  slug
 }
 */
 
@@ -132,14 +124,14 @@ const batch /*: ConcreteBatch*/ = {
                         "kind": "ScalarField",
                         "alias": null,
                         "args": null,
-                        "name": "name",
+                        "name": "slug",
                         "storageKey": null
                       },
                       {
                         "kind": "ScalarField",
                         "alias": null,
                         "args": null,
-                        "name": "slug",
+                        "name": "name",
                         "storageKey": null
                       }
                     ],
@@ -156,7 +148,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query AppQuery {\n  ...LocationsList\n}\n\nfragment LocationsList on RootQuery {\n  allLocations(search: \"San\") {\n    edges {\n      cursor\n      node {\n        ...Location\n      }\n    }\n  }\n}\n\nfragment Location on Location {\n  locationId\n  name\n  city {\n    ...City\n  }\n}\n\nfragment City on LocationArea {\n  name\n  slug\n}\n"
+  "text": "query AppQuery {\n  ...LocationsList\n}\n\nfragment LocationsList on RootQuery {\n  allLocations(search: \"San\") {\n    edges {\n      cursor\n      node {\n        locationId\n        name\n        city {\n          slug\n          name\n        }\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;

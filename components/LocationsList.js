@@ -7,18 +7,19 @@ import Location from './Location';
 const styles = {
   header: {
     textAlign: 'center',
-    padding: '10px 0 5px 0'
+    padding: '10px 0 5px 0',
   },
   container: {
     margin: '100px auto 0 auto',
-    maxWidth: 400
+    maxWidth: 400,
   },
   list: {
-    width: '100%'
-  }
+    width: '100%',
+  },
 };
 
 const LocationsList = ({ data }) => {
+  console.log(JSON.stringify(data));
   return (
     <div style={styles.container}>
       <div style={styles.header}>
@@ -34,7 +35,7 @@ const LocationsList = ({ data }) => {
       <div className={styles.list}>
         <List>
           {data.allLocations.edges.map(({ node, cursor }) =>
-            <Location data={node} key={cursor} />
+            <Location data={node} key={cursor} />,
           )}
         </List>
       </div>
@@ -50,10 +51,15 @@ export default createFragmentContainer(
         edges {
           cursor
           node {
-            ...Location
+            locationId
+            name
+            city {
+              slug
+              name
+            }
           }
         }
       }
     }
-  `
+  `,
 );

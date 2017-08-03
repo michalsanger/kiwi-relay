@@ -6,9 +6,11 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-jss": "^7.0.2",
-    "react-relay": "^1.1.0"
+    "react-relay": "^1.1.0",
+    "react-storybooks-relay-container": "^1.2.1"
   },
   "devDependencies": {
+    "@storybook/react": "^3.2.3",
     "babel-plugin-relay": "^1.1.0",
     "relay-compiler": "^1.1.0"
   },
@@ -16,6 +18,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "relay": "relay-compiler --src ./components --schema ./schema.json"
+    "relay": "relay-compiler --src ./components --schema ./schema.json",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   }
 }

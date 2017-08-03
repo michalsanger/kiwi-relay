@@ -12,7 +12,14 @@ export type LocationsList = {|
   +allLocations: ?{|
     +edges: ?$ReadOnlyArray<?{|
       +cursor: string;
-      +node: ?{| |};
+      +node: ?{|
+        +locationId: ?string;
+        +name: ?string;
+        +city: ?{|
+          +slug: ?string;
+          +name: ?string;
+        |};
+      |};
     |}>;
   |};
 |};
@@ -64,9 +71,43 @@ const fragment /*: ConcreteFragment*/ = {
               "plural": false,
               "selections": [
                 {
-                  "kind": "FragmentSpread",
-                  "name": "Location",
-                  "args": null
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "locationId",
+                  "storageKey": null
+                },
+                {
+                  "kind": "ScalarField",
+                  "alias": null,
+                  "args": null,
+                  "name": "name",
+                  "storageKey": null
+                },
+                {
+                  "kind": "LinkedField",
+                  "alias": null,
+                  "args": null,
+                  "concreteType": "LocationArea",
+                  "name": "city",
+                  "plural": false,
+                  "selections": [
+                    {
+                      "kind": "ScalarField",
+                      "alias": null,
+                      "args": null,
+                      "name": "slug",
+                      "storageKey": null
+                    },
+                    {
+                      "kind": "ScalarField",
+                      "alias": null,
+                      "args": null,
+                      "name": "name",
+                      "storageKey": null
+                    }
+                  ],
+                  "storageKey": null
                 }
               ],
               "storageKey": null

@@ -1,10 +1,9 @@
-import { createFragmentContainer, graphql } from 'react-relay';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import City from './City';
 
-const Location = ({ data }) => {
+export default ({ data }) => {
   return (
     <Card key={data.locationId}>
       <CardContent>
@@ -25,16 +24,3 @@ const Location = ({ data }) => {
     </Card>
   );
 };
-
-export default createFragmentContainer(
-  Location,
-  graphql`
-    fragment Location on Location {
-      locationId
-      name
-      city {
-        ...City
-      }
-    }
-  `
-);
